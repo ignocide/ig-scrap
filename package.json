@@ -1,0 +1,29 @@
+{
+  "name": "ig-scrap",
+  "version": "1.0.0",
+  "description": "instagram crawler",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://ignocide@github.com/ignocide/ig-scrap.git"
+  },
+  "keywords": [
+    "instagram",
+    "crawler",
+    "scrap",
+    "post",
+    "user"
+  ],
+  "author": "ignocide",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ignocide/ig-scrap/issues"
+  },
+  "homepage": "https://github.com/ignocide/ig-scrap#readme",
+  "dependencies": {
+    "axios": "^0.16.2"
+  }
+}
