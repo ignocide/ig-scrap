@@ -26,9 +26,10 @@ var user = igScrap.urlParser.user(user_url)
 //https://www.instagram.com/explore/tags/{{tab}}/ or tag
 igScrap.tag(tag_name/*or url*/, function (err, result) {
   // var media = result.media
-  // media.thumbnails()
-  // media.standard()
+  // media.getThumbnails({{size}})
+  // media.getStandards()
 })
+
 ```
 ### search media by users
 
@@ -43,3 +44,19 @@ igScrap.user(user/*or url*/, function (err, result) {
 
 #test
 * npm test
+
+#change log  
+
+## 2.0.0
+change a instagram's data structor, and image Object's property
+
+| before      | after   |
+| ------------- | ------ |
+| thumbnail_src | thumbnail_resources |
+| display_src | display_url |
+| demenstions | dimensions |  
+
+thumbnail_resources is List<Object>
+
+media.thumbnails() -> media.getThumbnails(size)  
+media.standards() -> media.getStandards()  
