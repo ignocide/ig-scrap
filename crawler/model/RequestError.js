@@ -1,8 +1,12 @@
 
 var RequestError = function (err) {
-  return {
-    status: err.response.status || 500,
-    statusText: err.response.statusText || 'Unknown'
+  if (err.response) {
+    return {
+      status: err.response.status || 500,
+      statusText: err.response.statusText || 'Unknown'
+    }
+  } else {
+    return err
   }
 }
 

@@ -5,6 +5,7 @@ const dataExp = /window\._sharedData\s?=\s?({.+);<\/script>/
 const RequestError = require('./model/RequestError')
 const Media = require('./model/Media')
 const User = require('./model/User')
+const Image = require('./model/Image')
 const urlParser = require('./urlParser')
 
 var parse = function (string) {
@@ -19,28 +20,21 @@ var parse = function (string) {
 }
 
 var normalizeMedia = function (arr) {
-  var fileds = [ 'id', 'demenstions', 'owner', 'thumbnail_src', 'code', 'date', 'display_src', 'caption']
   var list = []
   for (let origin of arr) {
-    var item = {}
-    item.comments = origin.comments.count
-    item.likes = origin.likes.count
-    for (let field of fileds) {
-      item[field] = origin[field]
-    }
-
+    let item = new Image(origin.node)
     list.push(item)
   }
   return new Media(list)
 }
 
 exports.tag = function (tag, callback) {
-  var url = 'https://www.instagram.com/explore/tags/' + encodeURIComponent(urlParser.tag(tag))
+  var url = 'https://www.instagram.com/explore/tags/' + encodeURIComponent(urlParser.tag(tag)) + '?__a=1'
   return axios.get(url)
   .then(function (res) {
-    var json = parse(res.data)
+    var json = res.data
     var result = {
-      media: normalizeMedia(json.entry_data.TagPage[0].tag.media.nodes)
+      media: normalizeMedia(json.graphql.hashtag.edge_hashtag_to_media.edges)
     }
 
     callback(null, result)
@@ -55,10 +49,9 @@ exports.user = function (user, callback) {
   return axios.get(url)
   .then(function (res) {
     var json = parse(res.data)
-
     var result = {
-      user: new User(json.entry_data.ProfilePage[0].user),
-      media: normalizeMedia(json.entry_data.ProfilePage[0].user.media.nodes)
+      user: new User(json.entry_data.ProfilePage[0].graphql.user),
+      media: normalizeMedia(json.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.edges)
     }
 
     callback(null, result)

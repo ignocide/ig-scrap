@@ -1,32 +1,32 @@
 'use strict'
 
-var Images = function (list) {
+var Media = function (list) {
   var arr = []
 
   arr = arr.concat.apply(arr, list || [])
-  arr.__proto__ = Images.prototype
+  arr.__proto__ = Media.prototype
   return arr
 }
-Images.prototype = []
+Media.prototype = []
 
-Images.prototype.thumbnails = function () {
+Media.prototype.getThumbnails = function (size) {
   var thumbnails = []
   for (var image of this) {
-    thumbnails.push(image.thumbnail_src)
+    thumbnails.push(image.getThumbnail(size))
   }
   return thumbnails
 }
 
-Images.prototype.standards = function () {
+Media.prototype.getStandards = function () {
   var standards = []
   for (var image of this) {
     var standard = {
       src: image.display_src,
       id: image.id
     }
-    standards.push(image.display_src)
+    standards.push(image.display_url)
   }
   return standards
 }
 
-module.exports = Images
+module.exports = Media
