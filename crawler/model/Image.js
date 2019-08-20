@@ -6,9 +6,11 @@ var Image = function (image) {
   this.owner = image.owner
   this.thumbnail_resources = image.thumbnail_resources
   this.code = image.code
-  this.date = image.date
+  this.date = image.taken_at_timestamp
   this.display_url = image.display_url
   this.caption = null
+  this.location = image.location ? image.location.name : null
+  this.ai_description = image.accessibility_caption
   try {
     this.caption = image.edge_media_to_caption.edges[0].text
   } catch (e) {}
