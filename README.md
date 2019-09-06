@@ -47,6 +47,17 @@ igScrap.user(user/*or url*/, function (err, result) {
 
 #change log  
 
+
+
+## 2.1.0
+add image attribute and fix attribute 'date'
+
+|  add   |
+| ------------- |
+| shortcode |
+| location |
+| ai_description |
+
 ## 2.0.0
 change a instagram's data structor, and image Object's property
 
